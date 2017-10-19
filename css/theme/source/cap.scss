@@ -1,0 +1,79 @@
+/**
+ * Black theme for reveal.js. This is the opposite of the 'white' theme.
+ *
+ * By Hakim El Hattab, http://hakim.se
+ */
+
+
+// Default mixins and settings -----------------
+@import "../template/mixins";
+@import "../template/settings";
+// ---------------------------------------------
+
+
+// Include theme-specific fonts
+// @import url(../../lib/font/source-sans-pro/source-sans-pro.css);
+// font-family: 'Ubuntu', sans-serif;
+
+// Override theme settings (see ../template/settings.scss)
+$backgroundColor: #fff;
+$backgroundImage: url("../../assets/images/cap-background.png");
+$backgroundSize: 100% 100%;
+
+$mainColor: #2B0A3D;
+$headingColor: #2B0A3D;
+
+$mainFontSize: 42px;
+$mainFont: 'Ubuntu', Helvetica, sans-serif;
+$headingFont: 'Ubuntu', Helvetica, sans-serif;
+$headingTextShadow: none;
+$headingLetterSpacing: normal;
+$headingTextTransform: uppercase;
+$headingFontWeight: 600;
+
+// Links
+$linkColor: #860864;
+$linkColorHover: lighten( $linkColor, 20% );
+
+$selectionBackgroundColor: lighten( $linkColor, 25% );
+
+$heading1Size: 2.5em;
+$heading2Size: 1.6em;
+$heading3Size: 1.3em;
+$heading4Size: 1.0em;
+
+section.has-light-background {
+	&, h1, h2, h3, h4, h5, h6 {
+		color: #2B0A3D;
+	}
+}
+
+// Theme template ------------------------------
+@import "../template/theme";
+// ---------------------------------------------
+
+// Custom Styles for Theme.
+span.corners {
+  position: absolute;
+  font-size: 0.75em;
+
+  &#header-hashtag {
+    top: 1.75em;
+    right: 1em;
+  }
+
+  &#footer-name {
+    bottom: 1em;
+    left: 1em;
+  }
+}
+
+.reveal .slides section .fragment.highlight-link {
+  color: $linkColor;
+}
+
+.reveal .slides section .tip,
+.reveal .slides section .fragment.tip,
+.reveal .slides section .fragment .tip {
+  font-style: italic;
+}

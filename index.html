@@ -1,0 +1,391 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <title>One-click automated builds - DrupalCamp Dublin 2017</title>
+
+		<meta name="description" content="Presentation for the One-click automated builds talk at DrupalCamp Dublin 2017">
+		<meta name="author" content="Luis Rodriguez Castromil">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="css/theme/cap.css">
+
+    <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
+
+		<!-- Theme used for syntax highlighting of code -->
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+	</head>
+	<body>
+		<div class="reveal">
+
+      <span id="header-hashtag" class="corners">#DrupalCampDublin</span>
+
+			<div class="slides">
+
+				<section>
+
+          <!-- Title. -->
+          <h2>One-click automated builds</h2>
+
+        </section>
+
+        <!-- About Me. -->
+        <section>
+
+          <h3>Luis Rodriguez Castromil</h3>
+          <h4 class="fragment">Software Engineer @ Capgemini UK</h4>
+          <ul>
+            <li class="fragment">Drupal Profile: <a href="https://www.drupal.org/u/luisrc7" target="_blank">@luisrc7</a></li>
+            <li class="fragment">Twitter: <a href="https://twitter.com/luisrc7" target="_blank">@luisrc7</a></li>
+            <li class="fragment">LinkedIn: <a href="https://www.linkedin.com/in/luisrc/" target="_blank">@luisrc</a></li>
+          </ul>
+
+        </section>
+
+        <!-- About the talk. -->
+        <section>
+
+          <h3>Structure</h3>
+          <p class="fragment">Simple presentation.</p>
+          <p class="fragment">Target for beginners but developers.</p>
+          <p class="fragment">Minimum knowledge, I will explain tools.</p>
+          <p class="fragment">You can leave now!</p>
+          <aside class="notes">
+            Case Study about building an eCommerce site in Drupal 8 from Chandeep.
+          </aside>
+
+        </section>
+
+        <!-- Tools and Commands. -->
+        <section>
+
+          <section>
+            <h3>Tools & Commands</h3>
+            <p class="fragment">Don't be affraid of the <span class="fragment highlight-link">"command line"</span>  <span class="fragment highlight-link">"console"</span>  <span class="fragment highlight-link">"terminal"</span></p>
+            <p class="fragment">It is easy and it will save you a lot of time.</p>
+          </section>
+
+          <!-- GIT -->
+          <section>
+            <h3>Version control</h3>
+            <p>VCS, Software to organise and control code revisions.</p>
+            <p class="fragment">You can save your code locally or remotely and perform easily deployments or restorations.</p>
+            <p class="fragment tip">Keep configuration in code, it can be tested.</p>
+            <h4 class="fragment">GIT</h4>
+          </section>
+
+          <section>
+            <h4>git clone/init</h4>
+            <p>Set up a repository.</p>
+            <p>If clone, specify a remote server like GitHub or Bitbucket.</p>
+          </section>
+
+          <section>
+            <h4>git add</h4>
+            <p>Stage your local changes to be commited.</p>
+            <div class="fragment">
+              <h4>git commit</h4>
+              <p>Save the staged changes into the local repository.</p>
+            </div>
+          </section>
+
+          <section>
+            <h4>git push</h4>
+            <p>Save your changes to a branch in a remote repository.</p>
+            <div class="fragment">
+              <h4>git pull</h4>
+              <p>Get the latest version of the code branch-repository.</p>
+            </div>
+          </section>
+
+          <section>
+            <h4>git hooks</h4>
+            <p>Scripts you can run before or after a git action.</p>
+            <p class="fragment tip">Useful one is pre-commit, you can define atomated tests or syntax check before commiting your code.</p>
+          </section>
+
+          <!-- DRUSH -->
+          <section>
+            <h3>Drush</h3>
+            <p>Drush is a command line interface for Drupal.</p>
+            <p class="fragment">You can do the common drupal tasks with a command.</p>
+            <p class="fragment">download/add/install/uninstall modules, clear caches, download database or files, etc.</p>
+          </section>
+
+          <section>
+            <h4>drush dl/en/dis MODULE-NAME</h4>
+            <p>Download a module, enable it or disable it.</p>
+            <code class="fragment">drush dl views</code>
+          </section>
+
+          <section>
+            <h4>drush site-install</h4>
+            <p>It will install a drupal site from the drupal downloaded files.</p>
+            <code class="fragment">drush site-install --db-url=mysql://DBuser:DBpass@localhost:port/DBname</code>
+            <p class="fragment tip">You can download and install.<br /> <code>drush dl drupal-7.x</code></p>
+          </section>
+
+          <section>
+            <h4>drush make</h4>
+            <p>Build a drupal site from a predefined file, called makefile.</p>
+            <code class="fragment">drush make d7example.make public</code>
+          </section>
+
+          <section>
+            <h4>drush rsync</h4>
+            <p>Import files between environments.</p>
+            <code class="fragment">drush rsync @d7.dev:%files/ @d7.local:%files</code>
+            <p class="fragment tip">You can exclude some folders with --exclude-paths.</p>
+          </section>
+
+          <section>
+            <h4>drush sql-sync</h4>
+            <p>Import a database between environments.</p>
+            <code class="fragment">drush sql-sync @d7.dev @d7.local</code>
+            <p class="fragment tip">You can exclude some tables with --skip-tables-list.</p>
+          </section>
+
+          <section>
+            <h4>drush updatedb</h4>
+            <p>Run the pending database updates.</p>
+            <code class="fragment">drush updatedb -y</code>
+            <p class="fragment tip">-y in any command will reply Yes to all.</p>
+          </section>
+
+          <!-- COMPOSER -->
+          <section>
+            <h3>Composer</h3>
+            <p>Dependency manager for PHP applications</p>
+            <p class="fragment tip">Drupal is a PHP application.</p>
+          </section>
+
+          <section>
+            <h4>composer init</h4>
+            <p>Creates composer.json in the path.</p>
+            <div class="fragment">
+              <h4>composer require</h4>
+              <p>Add an entry to the composer.json file.</p>
+              <code class="fragment">composer require drupal/devel:~1.0</code>
+            </div>
+          </section>
+
+          <section>
+            <h4>composer.json file</h4>
+            <p>Is the main file where you require your project dependencies.</p>
+            <div class="fragment">
+              <h4>composer install</h4>
+              <p>Install the defined/required dependencies in your project.</p>
+            </div>
+          </section>
+
+          <section>
+            <h4>composer.lock file</h4>
+            <p>This file sets the versions for the composer.json dependencies.</p>
+            <p class="fragment">If run install with a composer.lock file in your path will install all dependencies from composer.json but will get the specific versions from the composer.lock file.</p>
+            <p class="fragment tip">You can include composer.lock in your repo.</p>
+          </section>
+
+          <section>
+            <h4>composer update</h4>
+            <p>It will "force" to update to the latest versions declared in composer.json and it will update your composer.lock</p>
+            <p class="fragment tip">Of course, never update witout testing it before.</p>
+          </section>
+
+        </section>
+
+        <!-- Drupal 7. -->
+        <section>
+
+          <section>
+            <h4>Makefiles</h4>
+            <p>A bunch of lines where we specify which modules, themes, folders, versions we want to install.</p>
+          </section>
+
+          <section>
+            <p>The very basic makefile would have just the Drupal core.</p>
+            <pre><code class="hljs" data-trim contenteditable>
+  Makefile example here.
+  					</code></pre>
+          </section>
+
+          <section>
+            <p>If we want to add modules, we can specify version or path.</p>
+            <pre><code class="hljs" data-trim contenteditable>
+  Makefile example here.
+  					</code></pre>
+          </section>
+
+          <section>
+            <p>There is also a way to add patches to your modules.</p>
+            <pre><code class="hljs" data-trim contenteditable>
+  Makefile example here.
+  					</code></pre>
+          </section>
+
+          <section>
+            <h4>Create Makefiles</h4>
+            <p>Manually, or you can have a base installation already done and you want to export it with XXX.</p>
+            <p>Build a site from Makefile</p>
+            <p>Just run XXX (Code)</p>
+          </section>
+
+          <section>
+            <h4>Proposed workflow</h4>
+            <p class="fragment">1. We build the site from a makefile. -> We have a makefile from the previous points, so just run a fresh build.</p>
+            <p class="fragment">2. Now we can rsync our filesystem with drush, we can exclude some asset folders with XXX command.</p>
+            <p class="fragment">3. Now with drush we get a database dump, clear sensitive data and import it into the newly buit site.</p>
+            <p class="fragment">At this point we have our new site with the existing files and database from Production.</p>
+          </section>
+
+          <section>
+            <h4>Extra useful steps: (I would say mandatory)</h4>
+            <p class="fragment">1. Run database updates.</p>
+            <p class="fragment">2. Run any database script we could have.</p>
+            <p class="fragment">3. Run our tests, like behat.</p>
+          </section>
+
+        </section>
+
+        <!-- Example Drupal 7. -->
+        <section data-background="assets/images/construction-site.png">
+
+          <h3>Live Demo!</h3>
+          <h4>Build a Drupal 7 site from updated make file.</h4>
+          <p>I will leave this example to the end of the presentation if we have time.</p>
+
+        </section>
+
+        <!-- Drupal 8. -->
+        <section>
+
+          <section>
+            <h4>Composer builds in Drupal 8</h4>
+          </section>
+
+          <section>
+            <p>
+              Composer integration with Drupal 8 is still "under development", and there are a few ways to accomplish what we want.
+            </p>
+            <p class="fragment">
+              In the drupal documention page you can find more information.
+              <a href="https://www.drupal.org/docs/develop/using-composer/using-composer-with-drupal" target="_blank">https://www.drupal.org/docs/develop/using-composer/using-composer-with-drupal</a>
+            </p>
+          </section>
+
+          <section>
+            <p>
+              I am going to follow the Drupal Composer method.
+            </p>
+            <p class="fragment">
+              This tool will give us a structure and base from where we could start.
+            </p>
+          </section>
+
+          <section>
+
+            First download, create composer.json file.
+
+            <p class="fragment">
+              Cpde goes here.
+            </p>
+          </section>
+
+          <section>
+            Then build the site.
+
+            <p class="fragment">
+              Cpde goes here.
+            </p>
+          </section>
+
+          <section>
+            Now we can include our modules/libraries.
+
+            We can specify major versions or a specific one, also we can apply patches.
+
+            <p class="fragment">
+              Cpde goes here.
+            </p>
+          </section>
+
+          <section>
+            And we could run some commands at the end to ensure Testig, or Automatic Database updates, etc.
+          </section>
+
+        </section>
+
+        <!-- Example Drupal 8. -->
+        <section data-background="assets/images/construction-site.png">
+
+          <h3>Live Demo!</h3>
+          <h4>Build a Drupal 8 site with composer.</h4>
+          <p>I will leave this example to the end of the presentation if we have time.</p>
+
+        </section>
+
+        <!-- Documentation. -->
+        <section>
+
+          <h3>Documentation</h3>
+          <ul>
+            <li class="fragment"><a href="https://git-scm.com/docs/githooks" target="_blank">Git Hooks</a></li>
+            <li class="fragment"><a href="http://www.drush.org/en/master/" target="_blank">Drush</a></li>
+            <li class="fragment"><a href="https://getcomposer.org/doc/" target="_blank">Composer</a></li>
+            <li class="fragment"><a href="https://www.drupal.org/docs/develop/packaging-a-distribution/example-drupalorg-make-file" target="_blank">Makefiles</a></li>
+            <li class="fragment"><a href="http://drupal-composer.org/" target="_blank">Drupal Composer</a></li>
+            <li class="fragment">Presentation - <a href="http://lab.hakim.se/reveal-js/" target="_blank">reveal.js</a></li>
+          </ul>
+
+        </section>
+
+        <!-- Q&A and Thanks. -->
+        <section>
+
+          <section data-background="assets/images/questions.png">
+            <h2 style="color: black">Questions?</h2>
+          </section>
+
+          <section>
+            <h3>Thanks.</h3>
+            <a href="#">Link to presentation</a>
+          </section>
+
+        </section>
+
+			</div>
+
+      <span id="footer-name" class="corners">Luis Rodriguez Castromil</span>
+
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.js"></script>
+
+		<script>
+			// More info about config & dependencies:
+			// - https://github.com/hakimel/reveal.js#configuration
+			// - https://github.com/hakimel/reveal.js#dependencies
+			Reveal.initialize({
+				dependencies: [
+					{ src: 'plugin/markdown/marked.js' },
+					{ src: 'plugin/markdown/markdown.js' },
+					{ src: 'plugin/notes/notes.js', async: true },
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
+				]
+			});
+		</script>
+	</body>
+</html>
