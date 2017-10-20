@@ -35,10 +35,11 @@
 
 			<div class="slides">
 
+        <!-- Title. -->
 				<section>
 
-          <!-- Title. -->
           <h2>One-click automated builds</h2>
+          <p class="fragment">https://luisrc7.github.io/dcdublin17/</p>
 
         </section>
 
@@ -141,7 +142,7 @@
           <section>
             <h4>drush make</h4>
             <p>Build a drupal site from a predefined file, called makefile.</p>
-            <code class="fragment">drush make d7example.make public</code>
+            <code class="fragment">drush make d7example.make www</code>
           </section>
 
           <section>
@@ -162,7 +163,7 @@
             <h4>drush updatedb</h4>
             <p>Run the pending database updates.</p>
             <code class="fragment">drush updatedb -y</code>
-            <p class="fragment tip">-y in any command will reply Yes to all.</p>
+            <p class="fragment tip">-y in any command will reply with Yes to all.</p>
           </section>
 
           <!-- COMPOSER -->
@@ -178,7 +179,7 @@
             <div class="fragment">
               <h4>composer require</h4>
               <p>Add an entry to the composer.json file.</p>
-              <code class="fragment">composer require drupal/devel:~1.0</code>
+              <code class="fragment">composer require drupal/admin_toolbar</code>
             </div>
           </section>
 
@@ -200,8 +201,8 @@
 
           <section>
             <h4>composer update</h4>
-            <p>It will "force" to update to the latest versions declared in composer.json and it will update your composer.lock</p>
-            <p class="fragment tip">Of course, never update witout testing it before.</p>
+            <p>"force" to update to the latest versions declared in composer.json and it will update your composer.lock</p>
+            <p class="fragment tip">Of course, never update without testing it before.</p>
           </section>
 
         </section>
@@ -217,50 +218,71 @@
           <section>
             <p>The very basic makefile would have just the Drupal core.</p>
             <pre><code class="hljs" data-trim contenteditable>
-  Makefile example here.
+  api = 2
+  core = 7.x
+
+  projects[drupal][type] = "core"
+  projects[drupal][version] = 7.56
   					</code></pre>
           </section>
 
           <section>
             <p>If we want to add modules, we can specify version or path.</p>
             <pre><code class="hljs" data-trim contenteditable>
-  Makefile example here.
+  projects[views][version] = 3.18
+  projects[views][subdir] = "contrib"
   					</code></pre>
           </section>
 
           <section>
             <p>There is also a way to add patches to your modules.</p>
             <pre><code class="hljs" data-trim contenteditable>
-  Makefile example here.
+  projects[ctools] = 3.x
+  projects[ctools][subdir] = "contrib"
+  projects[ctools][patch][] = "http://drupal.org/files/issues/example-patch.patch"
+  					</code></pre>
+          </section>
+
+          <section>
+            <p>And different options to get your project.</p>
+            <pre><code class="hljs" data-trim contenteditable>
+  projects[mytheme][download][type] = git
+  projects[mytheme][download][url] = "git://github.com/luisrc7/theme-repo.git"
+  projects[mytheme][download][tag] = 7.x-1.0
+  projects[mytheme][download][branch] = "feature-xxx"
+
+  libraries[ckeditor][download][type] = get
+  libraries[ckeditor][download][url] = "http://download.cksource.com/CKEditor/CKEditor/CKEditor%204.7.3/ckeditor_4.7.3_standard.zip"
+  libraries[ckeditor][destination] = libraries
   					</code></pre>
           </section>
 
           <section>
             <h4>Create Makefiles</h4>
-            <p>Manually, or you can have a base installation already done and you want to export it with XXX.</p>
-            <p>Build a site from Makefile</p>
-            <p>Just run XXX (Code)</p>
+            <p>Manually, or you can have a base installation already done and you want to export it with <code>drush generate-makefile file.make</code>.</p>
+            <h4>Build a site from Makefile</h4>
+            <p>Just run <code>drush make file.make</code></p>
           </section>
 
           <section>
             <h4>Proposed workflow</h4>
-            <p class="fragment">1. We build the site from a makefile. -> We have a makefile from the previous points, so just run a fresh build.</p>
-            <p class="fragment">2. Now we can rsync our filesystem with drush, we can exclude some asset folders with XXX command.</p>
-            <p class="fragment">3. Now with drush we get a database dump, clear sensitive data and import it into the newly buit site.</p>
+            <p class="fragment">1. Build the site from a makefile.</p>
+            <p class="fragment">2. rsync our filesystem with drush.</p>
+            <p class="fragment">3. sync the database with drush and clear sensitive data.</p>
             <p class="fragment">At this point we have our new site with the existing files and database from Production.</p>
           </section>
 
           <section>
-            <h4>Extra useful steps: (I would say mandatory)</h4>
+            <h4>Extra useful steps: <br /> (I would say mandatory)</h4>
             <p class="fragment">1. Run database updates.</p>
-            <p class="fragment">2. Run any database script we could have.</p>
+            <p class="fragment">2. Run database or custom scripts.</p>
             <p class="fragment">3. Run our tests, like behat.</p>
           </section>
 
         </section>
 
         <!-- Example Drupal 7. -->
-        <section data-background="assets/images/construction-site.png">
+        <section>
 
           <h3>Live Demo!</h3>
           <h4>Build a Drupal 7 site from updated make file.</h4>
@@ -272,7 +294,8 @@
         <section>
 
           <section>
-            <h4>Composer builds in Drupal 8</h4>
+            <h3>Composer builds in Drupal 8</h3>
+            <p class="fragment">Still not 100% working.</p>
           </section>
 
           <section>
@@ -280,7 +303,7 @@
               Composer integration with Drupal 8 is still "under development", and there are a few ways to accomplish what we want.
             </p>
             <p class="fragment">
-              In the drupal documention page you can find more information.
+              In the drupal documention page you will find more information.
               <a href="https://www.drupal.org/docs/develop/using-composer/using-composer-with-drupal" target="_blank">https://www.drupal.org/docs/develop/using-composer/using-composer-with-drupal</a>
             </p>
           </section>
@@ -295,44 +318,55 @@
           </section>
 
           <section>
-
-            First download, create composer.json file.
-
-            <p class="fragment">
-              Cpde goes here.
+            <p>
+              First download/create the composer.json file with this command.
             </p>
+            <code class="fragment">
+              composer create-project drupal-composer/drupal-project:8.x-dev www
+            </code>
           </section>
 
           <section>
-            Then build the site.
-
-            <p class="fragment">
-              Cpde goes here.
+            <p>
+              From there we can start including our dependencies - modules, themes, etc.
             </p>
+            <code class="fragment">
+              composer require drupal/devel:~1.0
+            </code>
           </section>
 
           <section>
-            Now we can include our modules/libraries.
-
-            We can specify major versions or a specific one, also we can apply patches.
-
-            <p class="fragment">
-              Cpde goes here.
-            </p>
+            You can add patches with the composer-patches plugin.
+            <pre><code class="hljs" data-trim contenteditable>
+  "extra": {
+    "patches": {
+      "drupal/devel": {
+        "Patch description": "http://drupal.org/files/issues/example-patch.patch"
+      }
+    }
+  }
+  					</code></pre>
           </section>
 
           <section>
             And we could run some commands at the end to ensure Testig, or Automatic Database updates, etc.
+            <pre><code class="hljs" data-trim contenteditable>
+  "scripts": {
+    "drupal-scaffold": "DrupalComposer\\DrupalScaffold\\Plugin::scaffold",
+    "post-install-cmd": [
+      "@drupal-scaffold",
+    ],
+    "post-update-cmd": [
+      "@drupal-scaffold",
+    ]
+  }
+  					</code></pre>
           </section>
 
-        </section>
-
-        <!-- Example Drupal 8. -->
-        <section data-background="assets/images/construction-site.png">
-
-          <h3>Live Demo!</h3>
-          <h4>Build a Drupal 8 site with composer.</h4>
-          <p>I will leave this example to the end of the presentation if we have time.</p>
+          <section>
+            <p>There is also a module to generate this composer.json from an existing site. Composer Generate.</p>
+            <a href="https://www.drupal.org/project/composer_generate" target="_blank">https://www.drupal.org/project/composer_generate<a>
+          </section>
 
         </section>
 
@@ -360,7 +394,7 @@
 
           <section>
             <h3>Thanks.</h3>
-            <a href="#">Link to presentation</a>
+            <a href="https://luisrc7.github.io/dcdublin17/" target="_blank">https://luisrc7.github.io/dcdublin17/</a>
           </section>
 
         </section>

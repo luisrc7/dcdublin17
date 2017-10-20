@@ -56,6 +56,7 @@ section.has-light-background {
 span.corners {
   position: absolute;
   font-size: 0.75em;
+  z-index: 5;
 
   &#header-hashtag {
     top: 1.75em;
