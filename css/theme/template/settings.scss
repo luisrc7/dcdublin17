@@ -44,6 +44,6 @@ $selectionColor: #fff;
 	background: $backgroundColor;
   background-image: $backgroundImage;
   @media (min-width: 1024px) {
-    background-size: $backgroundImage;
+    background-size: $backgroundSize;
   }
 }

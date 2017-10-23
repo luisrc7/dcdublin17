@@ -15,7 +15,7 @@ body {
   background-color: #fff; }
   @media (min-width: 1024px) {
     body {
-      background-size: url("../../assets/images/cap-background.png"); } }
+      background-size: 100% 100%; } }
 
 .reveal {
   font-family: "Ubuntu", Helvetica, sans-serif;
